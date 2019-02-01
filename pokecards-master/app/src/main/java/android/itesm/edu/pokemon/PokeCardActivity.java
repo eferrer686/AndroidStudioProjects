@@ -18,7 +18,7 @@ public class PokeCardActivity extends AppCompatActivity {
 
         PokeCard pokeCard = (PokeCard) getIntent().getSerializableExtra("pokemon");
         loadPokemon(pokeCard);
-        
+
     }
 
     private void loadPokemon(PokeCard pokeCard){
