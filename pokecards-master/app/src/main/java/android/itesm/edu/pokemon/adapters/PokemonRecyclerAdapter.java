@@ -2,6 +2,8 @@ package android.itesm.edu.pokemon.adapters;
 
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.Intent;
+import android.itesm.edu.pokemon.PokeCardActivity;
 import android.itesm.edu.pokemon.R;
 import android.itesm.edu.pokemon.model.PokeCard;
 import android.support.annotation.NonNull;
@@ -12,10 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class PokemonRecyclerAdapter extends RecyclerView.Adapter<PokemonRecyclerAdapter.PokeRecordHolder>{
@@ -40,12 +44,24 @@ public class PokemonRecyclerAdapter extends RecyclerView.Adapter<PokemonRecycler
 
         final PokeRecordHolder pokeRecordHolder = new PokeRecordHolder(view);
 
+        pokeRecordHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PokeCard pokeCard = cards.get(pokeRecordHolder.getAdapterPosition());
+                Toast.makeText(context,pokeCard.getName(), Toast.LENGTH_SHORT).show();
+                Intent it = new Intent(context,PokeCardActivity.class);
+                it.putExtra("pokemon", pokeCard);
+
+                context.startActivity(it);
+            }
+        });
+
         return pokeRecordHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull PokeRecordHolder pokeRecordHolder, int i) {
-            pokeRecordHolder.name.setText(cards.get(i).getName());
+        pokeRecordHolder.name.setText(cards.get(i).getName());
         pokeRecordHolder.id.setText(cards.get(i).getId());
         pokeRecordHolder.artist.setText(cards.get(i).getArtist());
 
