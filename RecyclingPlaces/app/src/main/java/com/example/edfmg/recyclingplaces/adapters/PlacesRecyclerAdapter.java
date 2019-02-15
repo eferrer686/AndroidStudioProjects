@@ -1,27 +1,22 @@
 package com.example.edfmg.recyclingplaces.adapters;
 
 
-import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.edfmg.recyclingplaces.R;
 import com.example.edfmg.recyclingplaces.model.PlaceCard;
+import com.example.edfmg.recyclingplaces.recyclingPlaceCard;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAdapter.PlacesRecordHolder>{
@@ -51,8 +46,8 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
             public void onClick(View v) {
                 PlaceCard placeCard = cards.get(placesRecordHolder.getAdapterPosition());
                 Toast.makeText(context, placeCard.getName(), Toast.LENGTH_SHORT).show();
-                Intent it = new Intent(context, PlaceCard.class);
-                it.putExtra("pokemon", placeCard);
+                Intent it = new Intent(context, recyclingPlaceCard.class);
+                it.putExtra("place", placeCard);
 
                 context.startActivity(it);
             }
@@ -63,10 +58,16 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
 
     @Override
     public void onBindViewHolder(@NonNull PlacesRecordHolder placesRecordHolder, int i) {
+
+        placesRecordHolder.id.setText(cards.get(i).getId());
         placesRecordHolder.name.setText(cards.get(i).getName());
-        placesRecordHolder.phone.setText(cards.get(i).getId());
+        placesRecordHolder.phone.setText(cards.get(i).getPhoneNumber());
         placesRecordHolder.street.setText(cards.get(i).getStreet());
         placesRecordHolder.streetNumber.setText(cards.get(i).getStreetNumber());
+        placesRecordHolder.city.setText(cards.get(i).getCity());
+        placesRecordHolder.web.setText(cards.get(i).getWebsite());
+        placesRecordHolder.schedule.setText(cards.get(i).getSchedule());
+
 
     }
 
@@ -77,14 +78,19 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
 
     public static class PlacesRecordHolder extends RecyclerView.ViewHolder{
 
-        TextView name,street,streetNumber,phone;
+        TextView id,name,street,streetNumber,phone,city,web,schedule;
 
         public PlacesRecordHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.card_name);
+            id = itemView.findViewById(R.id.id);
             phone = itemView.findViewById(R.id.phone);
-            street = itemView.findViewById(R.id.street);
+            name = itemView.findViewById(R.id.name);
             streetNumber = itemView.findViewById(R.id.streetNumber);
+            street = itemView.findViewById(R.id.street);
+            city = itemView.findViewById(R.id.city);
+            web = itemView.findViewById(R.id.web);
+            schedule = itemView.findViewById(R.id.schedule);
+
 
         }
     }

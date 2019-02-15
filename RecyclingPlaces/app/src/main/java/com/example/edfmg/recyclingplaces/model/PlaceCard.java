@@ -91,7 +91,17 @@ public class PlaceCard implements Serializable{
         this.city = city;
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "PlaceCard{" +
+                "id='" + id + '\'' +
+                ", schedule='" + schedule + '\'' +
+                ", website='" + website + '\'' +
+                ", name='" + name + '\'' +
+                ", street='" + street + '\'' +
+                ", streetNumber='" + streetNumber + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", city='" + city + '\'' +
+                '}';
+    }
 }

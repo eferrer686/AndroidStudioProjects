@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -58,24 +59,18 @@ public class MainActivity extends AppCompatActivity {
 
                         jsonObject = cardsJson.getJSONObject(i);
                         PlaceCard placeCard = new PlaceCard();
-//                        placeCard.setId(jsonObject.getString("id"));
-//                        placeCard.setName(jsonObject.getString("properties.name"));
-//                        placeCard.setCity(jsonObject.getString("properties.city"));
-//                        placeCard.setPhoneNumber(jsonObject.getString("properties.phone_number"));
-//                        placeCard.setSchedule(jsonObject.getString("properties.hours_of_operation"));
-//                        placeCard.setStreet(jsonObject.getString("properties.street"));
-//                        placeCard.setStreetNumber(jsonObject.getString("properties.address_number"));
-//                        placeCard.setWebsite(jsonObject.getString("properties.website"));
+                        placeCard.setId(jsonObject.getString("id"));
+                        placeCard.setName(jsonObject.getJSONObject("properties").getString("name"));
+                        placeCard.setCity(jsonObject.getJSONObject("properties").getString("city"));
+                        placeCard.setPhoneNumber(jsonObject.getJSONObject("properties").getString("phone_number"));
+                        placeCard.setSchedule(jsonObject.getJSONObject("properties").getString("hours_of_operation"));
+                        placeCard.setStreet(jsonObject.getJSONObject("properties").getString("street"));
+                        placeCard.setStreetNumber(jsonObject.getJSONObject("properties").getString("address_number"));
+                        placeCard.setWebsite(jsonObject.getJSONObject("properties").getString("website"));
 
-                        placeCard.setId("id");
-                        placeCard.setName("name");
-                        placeCard.setCity("city");
-                        placeCard.setPhoneNumber("phone");
-                        placeCard.setSchedule("schedule");
-                        placeCard.setStreet("street");
-                        placeCard.setStreetNumber("#");
-                        placeCard.setWebsite("web");
 
+
+//                        Log.i("Card Info: ", placeCard.toString());
 
                         cards.add(placeCard);
                     }
